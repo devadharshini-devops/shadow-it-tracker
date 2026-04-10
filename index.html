@@ -1,33 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Shadow IT Detection</title>
+    <title>Shadow IT Detection</title>
 </head>
 
 <body>
-<h2>Shadow IT Detection</h2>
 
-<input id="appName" placeholder="Enter App Name">
-<button onclick="check()">Analyze</button>
+    <h2>Shadow IT Detection</h2>
 
-<p id="result"></p>
+    <!-- Input -->
+    <input id="appName" placeholder="Enter App Name">
+    
+    <!-- Button -->
+    <button onclick="check()">Analyze</button>
 
-<script>
-async function check() {
-    let app = document.getElementById("appName").value.toLowerCase();
+    <!-- Result -->
+    <p id="result"></p>
 
-    let res = await fetch("/analyze", {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({ appName: app })
-    });
+    <!-- Script -->
+    <script>
+    async function check() {
+        let app = document.getElementById("appName").value.toLowerCase();
 
-    let data = await res.json();
+        let res = await fetch("/analyze", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ appName: app })
+        });
 
-    document.getElementById("result").innerText =
-        data.status + " - " + data.risk;
-}
-</script>
+        let data = await res.json();
+
+        // Show result
+        document.getElementById("result").innerText = data.result;
+    }
+    </script>
 
 </body>
 </html>
