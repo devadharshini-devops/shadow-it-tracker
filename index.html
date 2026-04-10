@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Shadow IT Detection</title>
+</head>
+
+<body>
+<h2>Shadow IT Detection</h2>
+
+<input id="appName" placeholder="Enter App Name">
+<button onclick="check()">Analyze</button>
+
+<p id="result"></p>
+
+<script>
+async function check() {
+    let app = document.getElementById("appName").value.toLowerCase();
+
+    let res = await fetch("/analyze", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({ appName: app })
+    });
+
+    let data = await res.json();
+
+    document.getElementById("result").innerText =
+        data.status + " - " + data.risk;
+}
+</script>
+
+</body>
+</html>

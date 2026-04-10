@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AI Based Shadow IT Detection</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f4f6f8;
+        padding: 30px;
+    }
+    .container {
+        max-width: 600px;
+        background: white;
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        margin: auto;
+    }
+    h2 {
+        text-align: center;
+        color: #333;
+    }
+    input, button {
+        width: 100%;
+        padding: 10px;
+        margin-top: 10px;
+        font-size: 16px;
+    }
+    button {
+        background: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+    button:hover {
+        background: #0056b3;
+    }
+    .result {
+        margin-top: 20px;
+        padding: 15px;
+        border-radius: 6px;
+    }
+    .safe {
+        background: #d4edda;
+        color: #155724;
+    }
+    .warning {
+        background: #fff3cd;
+        color: #856404;
+    }
+    .danger {
+        background: #f8d7da;
+        color: #721c24;
+    }
+    table {
+        width: 100%;
+        margin-top: 20px;
+        border-collapse: collapse;
+    }
+    th, td {
+        padding: 8px;
+        border: 1px solid #ccc;
+        text-align: center;
+    }
+    th {
+        background: #eee;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>AI Based Shadow IT Detection</h2>
+
+    <label>IC Number (User ID)</label>
+    <input type="text" id="icNumber" placeholder="Eg: IC101">
+
+    <label>App / Website Name</label>
+    <input type="text" id="appName" placeholder="Eg: personaldrive.com">
+
+    <button onclick="analyze()">Analyze Usage</button>
+
+    <div id="output"></div>
+
+    <table id="logTable">
+        <tr>
+            <th>IC Number</th>
+            <th>App Name</th>
+            <th>Status</th>
+            <th>Risk</th>
+        </tr>
+    </table>
+</div>
+
+<script>
+    const authorizedApps = [
+        "gmail.com",
+        "outlook.com",
+        "teams.microsoft.com",
+        "jira.com",
+        "github.com"
+    ];
+
+    function analyze() {
+        let ic = document.getElementById("icNumber").value.trim();
+        let app = document.getElementById("appName").value.trim().toLowerCase();
+        let output = document.getElementById("output");
+
+        if (ic === "" || app === "") {
+            alert("IC Number and App Name must be filled");
+            return;
+        }
+
+        let status = "";
+        let risk = "";
+        let className = "";
+
+        // ---- AI BASED LOGIC (Rule-based Intelligence) ----
+        if (authorizedApps.includes(app)) {
+            status = "Authorized";
+            risk = "Low";
+            className = "safe";
+        } else if (app.includes("drive") || app.includes("cloud") || app.includes("share")) {
+            status = "Shadow IT";
+            risk = "High";
+            className = "danger";
+        } else {
+            status = "Shadow IT";
+            risk = "Medium";
+            className = "warning";
+        }
+
+        output.innerHTML = `
+            <div class="result ${className}">
+                <b>Status:</b> ${status}<br>
+                <b>Risk Level:</b> ${risk}<br>
+                <b>AI Suggestion:</b>
+                ${risk === "High" ? 
+                    "Avoid using this app. Data leakage risk detected." :
+                    risk === "Medium" ?
+                    "Use caution. App not approved by organization." :
+                    "Safe to use."}
+            </div>
+        `;
+
+        let table = document.getElementById("logTable");
+        let row = table.insertRow(-1);
+        row.insertCell(0).innerText = ic;
+        row.insertCell(1).innerText = app;
+        row.insertCell(2).innerText = status;
+        row.insertCell(3).innerText = risk;
+    }
+</script>
+
+</body>
+</html>
