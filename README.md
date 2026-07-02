@@ -18,7 +18,8 @@ Backend: Node.js, Express.js
 Design: Royal Business Dashboard theme
 
 ## Screenshots
-[Inga unga Application Verification UI screenshot drag panni podunga]
+<img width="1920" height="1080" alt="shadow-it png" src="https://github.com/user-attachments/assets/f1b262f8-1898-4bf1-857e-9a156783080f" />
+
 
 ## Developed by
 Elakkiyha.B & Devadharshini.M
