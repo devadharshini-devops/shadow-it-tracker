@@ -4,7 +4,7 @@
 An AI-powered system that identifies unauthorized applications within organizations and provides real-time risk analysis to prevent data leakage.
 
 ## Live Demo
-[Inga Vercel link varum]
+https://shadow-it-tracker.vercel.app
 
 ## Features
 - **Real-time App Verification**: Flags unregistered apps like Instagram, Dropbox instantly
